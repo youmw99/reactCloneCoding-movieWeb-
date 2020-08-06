@@ -1,12 +1,23 @@
 import React from 'react';
+import PropTypes from "prop-types"
 //import Potato from "./Potato";
 
-function Food({name, image}){
+function Food({name, picture, rating}){
   //console.log(props);
   return <div>
       <h2>Potato {name}</h2>
-      <img src={image}/>
+      <h4>{rating}/5.0</h4>
+      <img src={picture}/>
   </div>
+}
+
+//PropTypes를 통한 Type체크
+//다양한 체크 방법이 있다.
+//참조 https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+Food.propTypes = {
+  name : PropTypes.string.isRequired,
+  picture : PropTypes.string.isRequired,
+  //rating : PropTypes.number.isRequired
 }
   //jsx를 통한 argument 생성
  /* 다양한 형태의 props
@@ -24,7 +35,8 @@ const foodILike = [
 {
 id : 1,
 name: "Kimchi",
-image: "https://kstory365.files.wordpress.com/2015/01/kimchi-01-cabbage.jpg"
+image: "https://kstory365.files.wordpress.com/2015/01/kimchi-01-cabbage.jpg",
+rating : 5
 },
 {
 id : 2,
@@ -43,13 +55,12 @@ image: "https://img.seoul.co.kr//img/upload/2019/07/25/SSI_20190725184016.jpg"
 }];
 
 function renderFood(dish){
-  return <Food key = {dish.id} name = {dish.name} image = {dish.image}/>
+  return <Food key = {dish.id} name = {dish.name} picture = {dish.image} rating = {dish.rating}/>
 }
 
 function App() {
   return (
     <div className="App">
-      {console.log(foodILike.map(renderFood))}
       {foodILike.map(renderFood)}
     </div>
   );
